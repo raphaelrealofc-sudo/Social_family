@@ -7,79 +7,49 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; }
+        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; display: flex; flex-direction: column; min-height: 100vh; }
 
-        /* HEADER PROFISSIONAL */
+        /* HEADER */
         header {
-            width: 100%;
-            height: 180px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            width: 100%; height: 150px; display: flex; flex-direction: column; justify-content: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05); position: sticky; top: 0; background: #000; z-index: 100;
         }
-        .top-left-name {
-            position: absolute; top: 40px; left: 40px;
-            font-family: 'Syncopate', sans-serif;
-            font-size: 12px; letter-spacing: 3px;
-            animation: pulse 3s infinite;
-        }
+        .top-left-name { position: absolute; top: 30px; left: 40px; font-family: 'Syncopate', sans-serif; font-size: 10px; letter-spacing: 3px; animation: pulse 3s infinite; }
         .center-brand { text-align: center; }
-        .center-brand h1 {
-            font-family: 'Syncopate', sans-serif;
-            font-size: 24px; letter-spacing: 6px;
-            animation: pulse 4s infinite;
-        }
-        .line {
-            height: 1px; width: 60%; margin: 15px auto;
-            background: linear-gradient(90deg, transparent, #fff, transparent);
-            animation: expand 5s infinite;
-        }
+        .center-brand h1 { font-family: 'Syncopate', sans-serif; font-size: 20px; letter-spacing: 5px; animation: pulse 4s infinite; }
+        .line { height: 1px; width: 40%; margin: 10px auto; background: linear-gradient(90deg, transparent, #fff, transparent); }
 
         @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-        @keyframes expand { 0%, 100% { width: 0%; } 50% { width: 80%; } }
 
-        /* ÁREA DE UPLOAD */
-        main { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+        /* LAYOUT PRINCIPAL (Feed + Chat) */
+        .main-wrapper { display: flex; max-width: 1400px; margin: 20px auto; width: 100%; gap: 20px; padding: 0 20px; flex: 1; }
+
+        /* FEED (Lado Esquerdo) */
+        main { flex: 2; max-width: 850px; }
+        .upload-section { background: #080808; border: 1px solid #1a1a1a; padding: 20px; margin-bottom: 30px; }
+        .upload-container textarea { width: 100%; background: transparent; border: none; color: white; resize: none; height: 60px; outline: none; }
+        .btn-publish { background: #fff; color: #000; border: none; padding: 8px 20px; font-weight: bold; cursor: pointer; font-size: 11px; }
+
+        /* CHAT (Lado Direito) */
+        .chat-sidebar { flex: 1; min-width: 320px; background: #050505; border-left: 1px solid #111; height: calc(100vh - 190px); position: sticky; top: 170px; display: flex; flex-direction: column; }
+        .chat-tabs { display: flex; border-bottom: 1px solid #111; }
+        .tab-btn { flex: 1; background: transparent; border: none; color: #555; padding: 15px; cursor: pointer; font-family: 'Syncopate', sans-serif; font-size: 9px; letter-spacing: 1px; }
+        .tab-btn.active { color: #fff; border-bottom: 2px solid #fff; }
         
-        .upload-section {
-            background: #080808;
-            border: 1px solid #1a1a1a;
-            padding: 20px;
-            border-radius: 4px;
-            margin-bottom: 50px;
-        }
-        .upload-container textarea {
-            width: 100%; background: transparent; border: none;
-            color: white; font-family: 'Inter', sans-serif;
-            resize: none; height: 80px; outline: none; font-size: 15px;
-        }
-        .upload-actions {
-            display: flex; justify-content: space-between;
-            margin-top: 15px; border-top: 1px solid #111; padding-top: 15px;
-        }
-        .action-btn {
-            background: transparent; border: 1px solid #333;
-            color: #888; padding: 8px 15px; cursor: pointer;
-            font-size: 11px; letter-spacing: 1px;
-        }
-        .btn-publish {
-            background: #fff; color: #000; border: none;
-            padding: 8px 25px; font-weight: bold; cursor: pointer;
-            font-size: 11px; letter-spacing: 1px;
-        }
+        .chat-messages { flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 10px; }
+        .msg { background: #0a0a0a; padding: 10px; border-radius: 4px; font-size: 12px; position: relative; border-left: 2px solid #333; }
+        .msg-user { font-weight: bold; font-size: 10px; color: #fff; margin-bottom: 5px; display: block; letter-spacing: 1px; }
+        .delete-btn { position: absolute; right: 10px; top: 10px; color: #ff4444; font-size: 9px; cursor: pointer; opacity: 0.5; }
+        .delete-btn:hover { opacity: 1; }
 
-        /* FEED DINÂMICO */
-        .feed-container { display: flex; flex-direction: column; gap: 20px; }
-        .post-card {
-            background: #050505; border: 1px solid #111;
-            padding: 20px; animation: fadeIn 0.5s ease;
-        }
-        .post-header { font-size: 11px; color: #555; margin-bottom: 10px; letter-spacing: 2px; }
-        .post-content { font-size: 14px; line-height: 1.6; color: #ccc; }
+        .chat-input-area { padding: 15px; border-top: 1px solid #111; display: flex; gap: 10px; }
+        .chat-input-area input { flex: 1; background: #111; border: 1px solid #222; color: white; padding: 10px; outline: none; font-size: 12px; }
+        .btn-send { background: #fff; border: none; padding: 0 15px; cursor: pointer; font-weight: bold; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 900px) {
+            .main-wrapper { flex-direction: column; }
+            .chat-sidebar { height: 400px; position: static; }
+        }
     </style>
 </head>
 <body>
@@ -92,54 +62,86 @@
         </div>
     </header>
 
-    <main>
-        <section class="upload-section">
-            <div class="upload-container">
-                <textarea id="postInput" placeholder="O que há de novo na Social Family, RFL?"></textarea>
-                <div class="upload-actions">
-                    <div>
-                        <button class="action-btn">📷 Foto</button>
-                        <button class="action-btn">🎥 Vídeo</button>
+    <div class="main-wrapper">
+        <main>
+            <section class="upload-section">
+                <div class="upload-container">
+                    <textarea id="postInput" placeholder="O que há de novo na Social Family, RFL?"></textarea>
+                    <div style="text-align: right; margin-top: 10px;">
+                        <button class="btn-publish" onclick="publishPost()">PUBLICAR</button>
                     </div>
-                    <button class="btn-publish" onclick="publishPost()">PUBLICAR</button>
+                </div>
+            </section>
+            <div id="feed" class="feed-container"></div>
+        </main>
+
+        <aside class="chat-sidebar">
+            <div class="chat-tabs">
+                <button class="tab-btn active" onclick="switchTab('GLOBAL')">CHAT GLOBAL</button>
+                <button class="tab-btn" onclick="switchTab('FAMILY')">CHAT FAMILY</button>
+            </div>
+            
+            <div class="chat-messages" id="chatBox">
+                <div class="msg">
+                    <span class="msg-user">SISTEMA:</span>
+                    Bem-vindo ao canal <span id="currentChannel">GLOBAL</span>.
                 </div>
             </div>
-        </section>
 
-        <div style="font-size: 10px; letter-spacing: 4px; color: #333; text-align: center; margin-bottom: 30px;">
-            RECENT ACTIVITY
-        </div>
-
-        <div id="feed" class="feed-container">
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="Sua mensagem...">
+                <button class="btn-send" onclick="sendMsg()">></button>
             </div>
-    </main>
+        </aside>
+    </div>
 
     <script>
-        function publishPost() {
-            const input = document.getElementById('postInput');
-            const feed = document.getElementById('feed');
+        let currentChannel = "GLOBAL";
+        const isAdmin = true; // Simulação de Admin para você, RFL•★•REAL
 
-            if (input.value.trim() === "") {
-                alert("Escreva algo antes de publicar.");
-                return;
-            }
+        function switchTab(channel) {
+            currentChannel = channel;
+            document.getElementById('currentChannel').innerText = channel;
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.innerText.includes(channel));
+            });
+            // Limpa o chat para simular troca de sala
+            document.getElementById('chatBox').innerHTML = `<div class="msg"><span class="msg-user">SISTEMA:</span> Canal ${channel} conectado.</div>`;
+        }
 
-            // Criar a estrutura do novo post
-            const newPost = document.createElement('article');
-            newPost.className = 'post-card';
+        function sendMsg() {
+            const input = document.getElementById('chatInput');
+            if (input.value.trim() === "") return;
+
+            const chatBox = document.getElementById('chatBox');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'msg';
             
-            const now = new Date();
-            const time = now.getHours() + ":" + now.getMinutes();
-
-            newPost.innerHTML = `
-                <div class="post-header">RFL•★•REAL // AGORA ÀS ${time}</div>
-                <div class="post-content">${input.value}</div>
+            // Gerar HTML da mensagem com botão apagar se for Admin
+            let deleteHtml = isAdmin ? `<span class="delete-btn" onclick="this.parentElement.remove()">APAGAR</span>` : '';
+            
+            msgDiv.innerHTML = `
+                <span class="msg-user">RFL•★•REAL:</span>
+                ${input.value}
+                ${deleteHtml}
             `;
 
-            // Adicionar ao topo do feed
-            feed.prepend(newPost);
+            chatBox.appendChild(msgDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            input.value = "";
+        }
 
-            // Limpar campo
+        function publishPost() {
+            const input = document.getElementById('postInput');
+            if (input.value.trim() === "") return;
+            const feed = document.getElementById('feed');
+            const post = document.createElement('div');
+            post.style.background = "#080808";
+            post.style.padding = "20px";
+            post.style.marginBottom = "20px";
+            post.style.border = "1px solid #111";
+            post.innerHTML = `<div style="font-size:10px; color:#555; margin-bottom:10px">POSTED BY RFL•★•REAL</div><div>${input.value}</div>`;
+            feed.prepend(post);
             input.value = "";
         }
     </script>
