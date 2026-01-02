@@ -9,6 +9,11 @@
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; display: flex; flex-direction: column; height: 100vh; }
 
+        /* --- AJUSTE PARA O MENU LATERAL --- */
+        @media (min-width: 900px) {
+            body { padding-left: 70px; } /* Abre espaço para o menu não cobrir o conteúdo */
+        }
+
         /* HEADER */
         header { width: 100%; height: 100px; flex-shrink: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); background: #000; z-index: 10; }
         .top-left-name { font-family: 'Syncopate', sans-serif; font-size: 10px; letter-spacing: 2px; animation: pulse 3s infinite; margin-bottom: 5px; }
@@ -72,6 +77,8 @@
     </style>
 </head>
 <body>
+
+    <script src="menu_esquerdo.js"></script>
 
     <header>
         <div class="top-left-name">RFL•★•REAL</div>
@@ -137,9 +144,18 @@
     </nav>
 
     <script>
-        const isAdmin = true; // Você é o ADM
+        const isAdmin = true;
 
-        // CURTIR
+        // 2. ATALHO ENTER PARA O CHAT
+        document.addEventListener('DOMContentLoaded', () => {
+            const msgInput = document.getElementById('msgText');
+            if(msgInput) {
+                msgInput.addEventListener('keypress', function (e) {
+                    if (e.key === 'Enter') sendChatMsg();
+                });
+            }
+        });
+
         function toggleLike(btn) {
             const span = btn.querySelector('.like-count');
             let count = parseInt(span.innerText);
@@ -151,7 +167,6 @@
             span.innerText = count;
         }
 
-        // POSTAGEM COM OPÇÃO DE APAGAR ADM
         function createPost() {
             const txt = document.getElementById('postContent').value;
             const preview = document.getElementById('mediaPreview');
@@ -194,7 +209,6 @@
             }
         }
 
-        // MÍDIA
         function previewMedia(type) {
             const input = type === 'image' ? document.getElementById('imageInput') : document.getElementById('videoInput');
             const preview = document.getElementById('mediaPreview');
@@ -211,7 +225,6 @@
             document.getElementById('btn-texto').classList.add('active');
         }
 
-        // CHAT ADM
         function sendChatMsg() {
             const t = document.getElementById('msgText').value;
             if(!t.trim()) return;
@@ -238,7 +251,16 @@
             document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            document.getElementById(`nav-${id === 'feedView' ? 'feed' : 'chat'}`).classList.add('active');
+            const navBtn = document.getElementById(`nav-${id === 'feedView' ? 'feed' : 'chat'}`);
+            if(navBtn) navBtn.classList.add('active');
+            
+            // 3. SINCRONIZAR COM O MENU LATERAL (SE CARREGADO)
+            const menuIcons = document.querySelectorAll('.menu-item');
+            if(menuIcons.length > 0) {
+                menuIcons.forEach(i => i.classList.remove('active'));
+                if(id === 'feedView') menuIcons[0].classList.add('active');
+                if(id === 'chatView') menuIcons[1].classList.add('active');
+            }
         }
     </script>
 </body>
