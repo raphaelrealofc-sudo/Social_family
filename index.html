@@ -102,19 +102,37 @@
         </div>
     </header>
 
-    <div class="app-container">
-        <section id="feedView" class="view-section active">
-            <div class="upload-section">
-                <textarea id="postContent" placeholder="O que há de novo na Social Family, RFL?"></textarea>
-                <button class="btn-publish" onclick="createPost()">PUBLICAR NO FEED</button>
-            </div>
-            <div id="feedList">
-                <div class="post-card">
-                    <small style="color:#333; font-size:9px; letter-spacing:1px;">SYSTEM // INICIALIZADO</small>
-                    <p style="margin-top:10px; font-size:14px; color:#888;">Bem-vindo à rede oficial da Social Family.</p>
+  <div class="app-container">
+    <section id="feedView" class="view-section active">
+        <div class="upload-section">
+            <textarea id="postContent" placeholder="O que há de novo na Social Family, RFL?"></textarea>
+            
+            <div class="media-options">
+                <label class="media-btn">
+                    <input type="file" accept="image/*" id="imageInput" hidden onchange="previewMedia('image')">
+                    <span>📷 FOTO</span>
+                </label>
+                <label class="media-btn">
+                    <input type="file" accept="video/*" id="videoInput" hidden onchange="previewMedia('video')">
+                    <span>🎥 VÍDEO</span>
+                </label>
+                <div class="media-btn active">
+                    <span>📝 TEXTO</span>
                 </div>
             </div>
-        </section>
+
+            <button class="btn-publish" onclick="createPost()">PUBLICAR NO FEED</button>
+            
+            <div id="mediaPreview" style="margin-top: 15px; display: none;"></div>
+        </div>
+
+        <div id="feedList">
+            <div class="post-card">
+                <small style="color:#333; font-size:9px; letter-spacing:1px;">SYSTEM // INICIALIZADO</small>
+                <p style="margin-top:10px; font-size:14px; color:#888;">Bem-vindo à rede oficial da Social Family.</p>
+            </div>
+        </div>
+    </section>
 
         <section id="chatView" class="view-section">
             <div class="chat-container">
