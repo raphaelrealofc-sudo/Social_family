@@ -133,6 +133,21 @@
     .media-options { display: flex; gap: 20px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #111; }
     .media-btn { cursor: pointer; font-size: 10px; color: #444; font-family: 'Syncopate', sans-serif; }
     .media-btn.active { color: #fff; }
+       /* Estilo do Horário na Mensagem */
+    .msg-time {
+        display: block;
+        font-size: 8px;
+        color: #555;
+        margin-top: 5px;
+        text-align: right;
+        font-family: 'Syncopate', sans-serif;
+    }
+    
+    .msg strong {
+        color: #fff;
+        font-size: 11px;
+        letter-spacing: 1px;
+    }
 </style>
 </head>
 <body>
@@ -187,7 +202,7 @@
                     <button onclick="clearAllChat()" style="background:#ff4444; color:#fff; border:none; padding:5px; font-size:8px; font-family:'Syncopate'; cursor:pointer;">LIMPAR</button>
                 </div>
                 <div id="chatMessages"></div>
-                <div class="chat-input-box" style="display:flex; gap:8px; padding:15px 0; background:#000;">
+                <div class="chat-input-box">
                     <input type="text" id="msgText" placeholder="Mensagem..." style="flex:1; background:#0a0a0a; border:1px solid #1a1a1a; color:#fff; padding:12px; outline:none; border-radius:4px;">
                     <button onclick="sendChatMsg()" style="background:#fff; border:none; padding:0 20px; font-weight:bold; cursor:pointer;">></button>
                 </div>
@@ -256,20 +271,28 @@
             reader.readAsDataURL(input.files[0]);
         }
 
-        function sendChatMsg() {
-            const t = document.getElementById('msgText').value;
+       function sendChatMsg() {
+            const input = document.getElementById('msgText');
+            const t = input.value;
             if(!t.trim()) return;
+
+            // Pega a hora exata do momento do envio
+            const agora = new Date();
+            const horario = agora.getHours().toString().padStart(2, '0') + ":" + agora.getMinutes().toString().padStart(2, '0');
+
             const m = document.createElement('div');
             m.className = 'msg';
-            m.innerHTML = `<strong>RFL•★•REAL:</strong> ${t}`;
-            document.getElementById('chatMessages').appendChild(m);
-            document.getElementById('msgText').value = "";
+            // Monta a mensagem com o carimbo de tempo
+            m.innerHTML = `
+                <strong>RFL•★•REAL</strong> 
+                <p style="margin-top:5px;">${t}</p> 
+                <span class="msg-time">${horario}</span>
+            `;
+            
             const box = document.getElementById('chatMessages');
-            box.scrollTop = box.scrollHeight;
-        }
-
-        function clearAllChat() {
-            if(confirm("Limpar chat?")) document.getElementById('chatMessages').innerHTML = '';
+            box.appendChild(m);
+            input.value = "";
+            box.scrollTop = box.scrollHeight; // Faz o chat descer sozinho
         }
     </script>
 </body>
