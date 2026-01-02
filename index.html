@@ -99,19 +99,18 @@
         padding: 10px; 
         display: flex;
         flex-direction: column;
-    }
-    .msg { background: #0a0a0a; padding: 12px; border-radius: 4px; border-left: 2px solid #333; margin-bottom: 8px; font-size: 14px; width: fit-content; max-width: 90%; }
-    
-    /* CAIXA DE INPUT (O segredo para não sumir no celular) */
-   /* CAIXA DE INPUT - AJUSTE FINAL RFL */
-    .chat-input-box { 
-        padding: 10px 10px 65px 10px !important; /* Adicionado padding lateral e fixado o fundo */
-        background: #000;
-        flex-shrink: 0;
+    .msg { 
+        background: #0a0a0a; 
+        padding: 12px; 
+        border-radius: 4px; 
+        border-left: 2px solid #333; 
+        margin-bottom: 8px; 
+        font-size: 14px; 
+        width: fit-content; 
+        max-width: 90%; 
+        /* AJUSTE RFL: Organiza os itens em coluna */
         display: flex;
-        gap: 8px;
-        position: relative; /* Garante que fique sobreposta corretamente */
-        z-index: 10;
+        flex-direction: column;
     }
 
     /* BARRA DE NAVEGAÇÃO INFERIOR */
