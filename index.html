@@ -3,165 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avakin Social - RFL•★•REAL</title>
+    <title>SOCIAL FAMILY | Experience</title>
     <style>
+        /* Variáveis de Design Criativo */
         :root {
-            --primary-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            --avakin-blue: #00d2ff;
-            --bg-dark: #0f0f0f;
-            --glass: rgba(255, 255, 255, 0.1);
+            --neon-purple: #bc13fe;
+            --neon-blue: #00d2ff;
+            --deep-space: #050510;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --gold: #ffcc00;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
-            color: white;
+            background: radial-gradient(circle at top, #1a1a2e, var(--deep-space));
+            color: #fff;
+            font-family: 'Orbitron', sans-serif; /* Fonte futurista */
             margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            overflow-x: hidden;
         }
 
-        /* Container Principal */
-        .container {
-            max-width: 935px;
+        /* Header Futurista */
+        .social-family-nav {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--neon-purple);
+            box-shadow: 0 0 20px rgba(188, 19, 254, 0.3);
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-text {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+        }
+
+        /* Banner de Perfil Estilo 'Boss' */
+        .hero-profile {
             width: 100%;
+            height: 350px;
+            background: url('https://via.placeholder.com/1200x400') center/cover;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(transparent, var(--deep-space));
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+
+        .profile-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            transform: translateY(50px);
+        }
+
+        .avatar-frame {
+            width: 150px;
+            height: 150px;
+            border: 4px solid var(--neon-blue);
+            border-radius: 20px;
+            transform: rotate(5deg);
+            overflow: hidden;
+            box-shadow: 0 0 30px var(--neon-blue);
+            transition: 0.5s;
+        }
+
+        .avatar-frame:hover {
+            transform: rotate(0deg) scale(1.1);
+            border-color: var(--neon-purple);
+        }
+
+        /* Feed Criativo (Masonry Style) */
+        .creative-feed {
+            max-width: 1100px;
+            margin: 100px auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
             padding: 20px;
         }
 
-        /* Header Estilo Perfil */
-        .profile-header {
-            display: flex;
-            align-items: center;
-            padding: 40px 20px;
-            gap: 50px;
-        }
-
-        .profile-pic {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            padding: 3px;
-            background: var(--primary-gradient);
-        }
-
-        .profile-pic img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: #000;
-            object-fit: cover;
-        }
-
-        .profile-info h1 {
-            font-size: 28px;
-            font-weight: 300;
-        }
-
-        .btn-follow {
-            background-color: var(--avakin-blue);
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        /* Stories / Destaques */
-        .highlights {
-            display: flex;
-            gap: 25px;
-            margin: 20px 0;
-            overflow-x: auto;
-            padding: 10px;
-        }
-
-        .story {
-            text-align: center;
-            font-size: 12px;
-        }
-
-        .story-circle {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background: var(--glass);
-            border: 1px solid #333;
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Feed de Fotos */
-        .feed-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .post {
-            aspect-ratio: 1 / 1;
-            background: var(--glass);
-            border-radius: 4px;
-            overflow: hidden;
+        .social-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            width: 320px;
+            padding: 15px;
+            backdrop-filter: blur(5px);
+            transition: 0.4s;
             position: relative;
-            cursor: pointer;
         }
 
-        .post img {
+        .social-card:hover {
+            border-color: var(--neon-blue);
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .card-image {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            filter: grayscale(30%);
+            transition: 0.5s;
         }
 
-        .post:hover img {
-            transform: scale(1.05);
+        .social-card:hover .card-image {
+            filter: grayscale(0%);
         }
 
-        @media (max-width: 600px) {
-            .profile-header { flex-direction: column; text-align: center; gap: 20px; }
-            .feed-grid { gap: 3px; }
+        /* Botão Interativo Social Family */
+        .btn-family {
+            background: transparent;
+            border: 2px solid var(--neon-purple);
+            color: white;
+            padding: 10px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: 0.3s;
+            margin-top: 15px;
         }
+
+        .btn-family:hover {
+            background: var(--neon-purple);
+            box-shadow: 0 0 20px var(--neon-purple);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--gold);
+            color: black;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="container">
-        <header class="profile-header">
-            <div class="profile-pic">
-                <img src="https://via.placeholder.com/150" alt="Avatar Avakin">
+    <nav class="social-family-nav">
+        <div class="logo-text">SOCIAL FAMILY</div>
+    </nav>
+
+    <section class="hero-profile">
+        <div class="hero-overlay"></div>
+        <div class="profile-content">
+            <div class="avatar-frame">
+                <img src="https://via.placeholder.com/150" alt="RFL" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
-            <section class="profile-info">
-                <h1>RFL•★•REAL</h1>
-                <p><strong>Avakin Life Influencer</strong></p>
-                <p>Explorando o metaverso com estilo ✨</p>
-                <button class="btn-follow">Seguir</button>
-            </section>
-        </header>
-
-        <div class="highlights">
-            <div class="story"><div class="story-circle">🏠</div><span>Apartes</span></div>
-            <div class="story"><div class="story-circle">👗</div><span>Looks</span></div>
-            <div class="story"><div class="story-circle">✈️</div><span>Viagens</span></div>
-            <div class="story"><div class="story-circle">🤝</div><span>Amigos</span></div>
+            <h2 style="margin-top: 20px; letter-spacing: 3px;">RFL•★•REAL</h2>
+            <div class="status-badge">FAMÍLIA FOUNDER</div>
         </div>
+    </section>
 
-        <hr style="border: 0.5px solid #333;">
+    <main class="creative-feed">
+        <article class="social-card">
+            <img src="https://via.placeholder.com/300x400" class="card-image" alt="Vibe">
+            <h3>NIGHT VIBES</h3>
+            <p style="color: #aaa; font-size: 0.9rem;">Explorando a vida noturna do Avakin com a melhor família.</p>
+            <button class="btn-family">Inspecionar</button>
+        </article>
 
-        <main class="feed-grid">
-            <div class="post"><img src="https://via.placeholder.com/300" alt="Post 1"></div>
-            <div class="post"><img src="https://via.placeholder.com/300" alt="Post 2"></div>
-            <div class="post"><img src="https://via.placeholder.com/300" alt="Post 3"></div>
-            <div class="post"><img src="https://via.placeholder.com/300" alt="Post 4"></div>
-            <div class="post"><img src="https://via.placeholder.com/300" alt="Post 5"></div>
-            <div class="post"><img src="https://via.placeholder.com/300" alt="Post 6"></div>
-        </main>
-    </div>
+        <article class="social-card">
+            <img src="https://via.placeholder.com/300x300" class="card-image" alt="Look">
+            <h3>GOLDEN LOOK</h3>
+            <p style="color: #aaa; font-size: 0.9rem;">O ouro nunca sai de moda na Social Family.</p>
+            <button class="btn-family">Inspecionar</button>
+        </article>
+
+        <article class="social-card">
+            <img src="https://via.placeholder.com/300x500" class="card-image" alt="Event">
+            <h3>THE MANSION</h3>
+            <p style="color: #aaa; font-size: 0.9rem;">Novo apartamento disponível para o evento de hoje.</p>
+            <button class="btn-family">Inspecionar</button>
+        </article>
+    </main>
 
 </body>
 </html>
