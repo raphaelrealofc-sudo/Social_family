@@ -93,12 +93,15 @@
     .post-card img, .post-card video { max-width: 100%; border-radius: 4px; margin-top: 10px; display: block; }
 
     /* ÁREA DE MENSAGENS DO CHAT */
+    #/* ÁREA DE MENSAGENS DO CHAT */
     #chatMessages { 
         flex: 1; 
         overflow-y: auto; 
         padding: 10px; 
         display: flex;
         flex-direction: column;
+    } /* <--- VOCÊ PRECISA DESSA CHAVE AQUI PARA FECHAR */
+
     .msg { 
         background: #0a0a0a; 
         padding: 12px; 
@@ -108,7 +111,6 @@
         font-size: 14px; 
         width: fit-content; 
         max-width: 90%; 
-        /* AJUSTE RFL: Organiza os itens em coluna */
         display: flex;
         flex-direction: column;
     }
