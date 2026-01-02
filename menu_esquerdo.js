@@ -36,7 +36,7 @@ style.textContent = `
     @media (max-width: 900px) {
         .side-menu-icons { 
             display: flex; /* Agora ele continua aparecendo */
-            top: 100px; /* Mantém abaixo do seu header */
+            top: 60px; /* Mantém abaixo do seu header */
             width: 60px;
         }
     }
