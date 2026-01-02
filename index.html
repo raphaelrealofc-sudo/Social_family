@@ -2,69 +2,67 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SOCIAL FAMILY | RFL•★•REAL</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Reset e Base */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
             background-color: #000000;
             color: #ffffff;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            width: 100%;
         }
 
-        /* Animação Pulsante Sutil */
+        /* Animações */
         @keyframes pulseGlow {
-            0% { opacity: 0.6; text-shadow: 0 0 5px rgba(255,255,255,0.2); }
-            50% { opacity: 1; text-shadow: 0 0 20px rgba(255,255,255,0.6); }
-            100% { opacity: 0.6; text-shadow: 0 0 5px rgba(255,255,255,0.2); }
+            0%, 100% { opacity: 0.5; text-shadow: 0 0 5px rgba(255,255,255,0.2); }
+            50% { opacity: 1; text-shadow: 0 0 15px rgba(255,255,255,0.5); }
         }
 
         @keyframes lineExpand {
-            0% { width: 0%; opacity: 0.3; }
-            50% { width: 100%; opacity: 0.8; }
-            100% { width: 0%; opacity: 0.3; }
+            0%, 100% { width: 0%; opacity: 0.2; }
+            50% { width: 90%; opacity: 0.7; }
         }
 
-        /* Cabeçalho Superior */
+        /* Header */
         header {
             width: 100%;
-            height: 180px;
+            min-height: 200px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            position: relative;
-            padding: 0 40px;
+            align-items: center;
+            padding: 20px;
             border-bottom: 1px solid rgba(255,255,255,0.05);
+            position: relative;
         }
 
         .top-left-name {
-            position: absolute;
-            top: 40px;
-            left: 40px;
             font-family: 'Syncopate', sans-serif;
-            font-size: 14px;
-            letter-spacing: 3px;
-            font-weight: 700;
+            font-size: 10px;
+            letter-spacing: 2px;
             animation: pulseGlow 3s infinite ease-in-out;
-            color: #fff;
+            margin-bottom: 30px;
         }
 
-        .center-brand {
-            text-align: center;
-            margin-top: 20px;
+        /* No Desktop o nome fica no canto, no Mobile ele centraliza acima da frase */
+        @media (min-width: 768px) {
+            .top-left-name { position: absolute; top: 40px; left: 40px; margin-bottom: 0; font-size: 12px; }
         }
+
+        .center-brand { text-align: center; width: 100%; }
 
         .center-brand h1 {
             font-family: 'Syncopate', sans-serif;
-            font-size: 26px;
-            letter-spacing: 8px;
+            font-size: clamp(16px, 5vw, 26px); /* Fonte fluida */
+            letter-spacing: clamp(4px, 2vw, 8px);
             text-transform: uppercase;
             animation: pulseGlow 4s infinite ease-in-out;
             margin-bottom: 15px;
+            padding: 0 10px;
         }
 
         .pulsing-line-container {
@@ -75,51 +73,43 @@
         }
 
         .line {
-            height: 1.5px;
+            height: 1px;
             background: linear-gradient(90deg, transparent, #ffffff, transparent);
             animation: lineExpand 5s infinite ease-in-out;
         }
 
-        /* Conteúdo Principal */
+        /* Conteúdo */
         main {
             max-width: 1200px;
-            margin: 60px auto;
+            margin: 40px auto;
             padding: 0 20px;
         }
 
         .section-title {
-            font-size: 12px;
-            letter-spacing: 5px;
+            font-size: 10px;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            color: #555;
-            margin-bottom: 40px;
+            color: #444;
+            margin-bottom: 30px;
             text-align: center;
         }
 
-        /* Grid Profissional */
         .content-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         .entry-card {
-            background: #080808;
+            background: #050505;
             border: 1px solid #111;
-            padding: 2px;
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            cursor: pointer;
-        }
-
-        .entry-card:hover {
-            border-color: #444;
-            transform: translateY(-5px);
+            transition: 0.4s;
         }
 
         .img-container {
             width: 100%;
-            aspect-ratio: 16 / 9;
-            background: #111;
+            aspect-ratio: 1 / 1; /* Formato quadrado para impacto visual */
+            background: #0a0a0a;
             overflow: hidden;
         }
 
@@ -127,46 +117,22 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.7;
-            transition: 0.5s;
+            opacity: 0.8;
+            transition: 0.6s;
         }
 
-        .entry-card:hover img {
-            opacity: 1;
-            transform: scale(1.05);
-        }
+        .entry-card:hover img { opacity: 1; transform: scale(1.03); }
 
-        .card-details {
-            padding: 20px;
-        }
+        .card-details { padding: 20px; }
+        .card-details h3 { font-size: 14px; letter-spacing: 2px; margin-bottom: 8px; font-weight: 400; }
+        .card-details p { color: #555; font-size: 12px; line-height: 1.5; }
 
-        .card-details h3 {
-            font-size: 16px;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            font-weight: 400;
-        }
-
-        .card-details p {
-            color: #666;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        /* Footer */
         footer {
-            padding: 100px 0 40px;
+            padding: 60px 20px 30px;
             text-align: center;
-            font-size: 10px;
-            letter-spacing: 2px;
-            color: #333;
-            text-transform: uppercase;
-        }
-
-        @media (max-width: 768px) {
-            .center-brand h1 { font-size: 16px; letter-spacing: 4px; }
-            .top-left-name { font-size: 10px; top: 20px; left: 20px; }
-            header { height: 140px; }
+            font-size: 9px;
+            letter-spacing: 1px;
+            color: #222;
         }
     </style>
 </head>
@@ -184,43 +150,33 @@
     </header>
 
     <main>
-        <div class="section-title">Latest Archives / Projects</div>
+        <div class="section-title">Archives // 2026</div>
         
         <div class="content-grid">
             <article class="entry-card">
                 <div class="img-container">
-                    <img src="https://via.placeholder.com/600x400/111/fff?text=AVAKIN+EDITORIAL" alt="Editorial">
+                    <img src="https://via.placeholder.com/600/000/fff?text=IMG_01" alt="Editorial">
                 </div>
                 <div class="card-details">
-                    <h3>EDITORIAL_01</h3>
-                    <p>Análise de estética virtual e design de ambiente no metaverso Avakin Life.</p>
+                    <h3>ESTHETIC_VIBE</h3>
+                    <p>O impacto visual da Social Family no cenário atual.</p>
                 </div>
             </article>
 
             <article class="entry-card">
                 <div class="img-container">
-                    <img src="https://via.placeholder.com/600x400/111/fff?text=FAMILY+STRUCTURE" alt="Structure">
+                    <img src="https://via.placeholder.com/600/000/fff?text=IMG_02" alt="Structure">
                 </div>
                 <div class="card-details">
-                    <h3>COMMUNITY_CORE</h3>
-                    <p>A base da Social Family: liderança, lealdade e presença digital.</p>
-                </div>
-            </article>
-
-            <article class="entry-card">
-                <div class="img-container">
-                    <img src="https://via.placeholder.com/600x400/111/fff?text=IDENTITY+SYSTEM" alt="Identity">
-                </div>
-                <div class="card-details">
-                    <h3>VISUAL_ID</h3>
-                    <p>Sistemas de identidade visual aplicados a perfis de alta performance.</p>
+                    <h3>LEADERSHIP</h3>
+                    <p>Gestão e presença de RFL•★•REAL na comunidade.</p>
                 </div>
             </article>
         </div>
     </main>
 
     <footer>
-        &copy; 2026 SOCIAL RFL•★•REAL FAMILY | ALL RIGHTS RESERVED
+        &copy; 2026 SOCIAL RFL•★•REAL FAMILY
     </footer>
 
 </body>
