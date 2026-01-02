@@ -1,4 +1,6 @@
-// 1. Criar e injetar o Estilo (CSS)
+// menu_esquerdo.js
+
+// 1. Injetar o Estilo (CSS)
 const style = document.createElement('style');
 style.textContent = `
     .side-menu-icons {
@@ -26,8 +28,9 @@ style.textContent = `
         font-size: 20px;
         transition: 0.3s;
         border-radius: 12px;
+        color: #666; /* Cor padrão dos ícones */
     }
-    .menu-item:hover { background: #1a1a1a; }
+    .menu-item:hover { background: #1a1a1a; color: #fff; }
     .menu-item.active { background: #fff; color: #000; }
     .menu-bottom { margin-top: auto; color: #444; }
 
@@ -37,14 +40,27 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// 2. Criar e injetar o HTML do Menu
+// 2. Criar o HTML e a Lógica de Clique
 const menuContainer = document.createElement('div');
 menuContainer.className = 'side-menu-icons';
 menuContainer.innerHTML = `
-    <div class="menu-item active" onclick="showView('feedView')">🏠</div>
-    <div class="menu-item" onclick="showView('chatView')">💬</div>
-    <div class="menu-item">🔔</div>
-    <div class="menu-item">👤</div>
-    <div class="menu-item menu-bottom">⚙️</div>
+    <div class="menu-item active" onclick="menuNav('feedView', this)">🏠</div>
+    <div class="menu-item" onclick="menuNav('chatView', this)">💬</div>
+    <div class="menu-item" onclick="menuNav('', this)">🔔</div>
+    <div class="menu-item" onclick="menuNav('', this)">👤</div>
+    <div class="menu-item menu-bottom" onclick="menuNav('', this)">⚙️</div>
 `;
+
+// Função para mudar a aba e destacar o ícone
+window.menuNav = function(viewId, element) {
+    // Se houver uma viewId (feedView ou chatView), chama a função original do seu HTML
+    if(viewId && typeof showView === 'function') {
+        showView(viewId);
+    }
+    
+    // Remove 'active' de todos e coloca no clicado
+    document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
+    element.classList.add('active');
+};
+
 document.body.prepend(menuContainer);
