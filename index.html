@@ -74,9 +74,29 @@
         .nav-item.active { color: #fff; border-top: 2px solid #fff; }
 
         @media (min-width: 900px) { .bottom-nav { display: none; } .sidebar { display: block; } .view-section { display: block !important; } #chatView { border-left: 1px solid #111; max-width: 400px; } }
+   @media (max-width: 600px) {
+    .view-section {
+        padding: 15px; /* Reduz um pouco o recuo para ganhar espaço no celular */
+    }
+    .center-brand h1 {
+        font-size: 12px; /* Diminui levemente o título para não quebrar linha */
+    }
+}
     </style>
 </head>
 <body>
+    <script src="menu_esquerdo.js"></script>
+
+    <header>
+        <div class="top-left-name">RFL•★•REAL</div>
+        <div class="center-brand">
+            <h1>Social RFL•★•REAL Family</h1>
+            <div class="line"></div>
+        </div>
+    </header>
+
+    <div class="app-container">
+        
 
     <script src="menu_esquerdo.js"></script>
 
