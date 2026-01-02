@@ -3,197 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOCIAL FAMILY | Experience</title>
+    <title>SOCIAL FAMILY | RFL•★•REAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Variáveis de Design Criativo */
-        :root {
-            --neon-purple: #bc13fe;
-            --neon-blue: #00d2ff;
-            --deep-space: #050510;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --gold: #ffcc00;
-        }
-
+        /* Reset e Base */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            background: radial-gradient(circle at top, #1a1a2e, var(--deep-space));
-            color: #fff;
-            font-family: 'Orbitron', sans-serif; /* Fonte futurista */
-            margin: 0;
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
         }
 
-        /* Header Futurista */
-        .social-family-nav {
-            padding: 20px;
-            text-align: center;
-            border-bottom: 2px solid var(--neon-purple);
-            box-shadow: 0 0 20px rgba(188, 19, 254, 0.3);
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(10px);
+        /* Animação Pulsante Sutil */
+        @keyframes pulseGlow {
+            0% { opacity: 0.6; text-shadow: 0 0 5px rgba(255,255,255,0.2); }
+            50% { opacity: 1; text-shadow: 0 0 20px rgba(255,255,255,0.6); }
+            100% { opacity: 0.6; text-shadow: 0 0 5px rgba(255,255,255,0.2); }
         }
 
-        .logo-text {
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            background: linear-gradient(to right, var(--neon-blue), var(--neon-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+        @keyframes lineExpand {
+            0% { width: 0%; opacity: 0.3; }
+            50% { width: 100%; opacity: 0.8; }
+            100% { width: 0%; opacity: 0.3; }
         }
 
-        /* Banner de Perfil Estilo 'Boss' */
-        .hero-profile {
+        /* Cabeçalho Superior */
+        header {
             width: 100%;
-            height: 350px;
-            background: url('https://via.placeholder.com/1200x400') center/cover;
+            height: 180px;
             display: flex;
-            align-items: flex-end;
+            flex-direction: column;
             justify-content: center;
             position: relative;
+            padding: 0 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .hero-overlay {
-            background: linear-gradient(transparent, var(--deep-space));
+        .top-left-name {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 14px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            animation: pulseGlow 3s infinite ease-in-out;
+            color: #fff;
+        }
+
+        .center-brand {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .center-brand h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 26px;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            animation: pulseGlow 4s infinite ease-in-out;
+            margin-bottom: 15px;
+        }
+
+        .pulsing-line-container {
+            width: 100%;
+            height: 1px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .line {
+            height: 1.5px;
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
+            animation: lineExpand 5s infinite ease-in-out;
+        }
+
+        /* Conteúdo Principal */
+        main {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 12px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #555;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        /* Grid Profissional */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .entry-card {
+            background: #080808;
+            border: 1px solid #111;
+            padding: 2px;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+        }
+
+        .entry-card:hover {
+            border-color: #444;
+            transform: translateY(-5px);
+        }
+
+        .img-container {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #111;
+            overflow: hidden;
+        }
+
+        .img-container img {
             width: 100%;
             height: 100%;
-            position: absolute;
-        }
-
-        .profile-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            transform: translateY(50px);
-        }
-
-        .avatar-frame {
-            width: 150px;
-            height: 150px;
-            border: 4px solid var(--neon-blue);
-            border-radius: 20px;
-            transform: rotate(5deg);
-            overflow: hidden;
-            box-shadow: 0 0 30px var(--neon-blue);
+            object-fit: cover;
+            opacity: 0.7;
             transition: 0.5s;
         }
 
-        .avatar-frame:hover {
-            transform: rotate(0deg) scale(1.1);
-            border-color: var(--neon-purple);
+        .entry-card:hover img {
+            opacity: 1;
+            transform: scale(1.05);
         }
 
-        /* Feed Criativo (Masonry Style) */
-        .creative-feed {
-            max-width: 1100px;
-            margin: 100px auto;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 25px;
-            justify-content: center;
+        .card-details {
             padding: 20px;
         }
 
-        .social-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 15px;
-            width: 320px;
-            padding: 15px;
-            backdrop-filter: blur(5px);
-            transition: 0.4s;
-            position: relative;
-        }
-
-        .social-card:hover {
-            border-color: var(--neon-blue);
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .card-image {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            filter: grayscale(30%);
-            transition: 0.5s;
-        }
-
-        .social-card:hover .card-image {
-            filter: grayscale(0%);
-        }
-
-        /* Botão Interativo Social Family */
-        .btn-family {
-            background: transparent;
-            border: 2px solid var(--neon-purple);
-            color: white;
-            padding: 10px 30px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            text-transform: uppercase;
-            transition: 0.3s;
-            margin-top: 15px;
-        }
-
-        .btn-family:hover {
-            background: var(--neon-purple);
-            box-shadow: 0 0 20px var(--neon-purple);
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 5px 15px;
-            background: var(--gold);
-            color: black;
-            border-radius: 5px;
-            font-size: 0.8rem;
+        .card-details h3 {
+            font-size: 16px;
+            letter-spacing: 2px;
             margin-bottom: 10px;
+            font-weight: 400;
         }
 
+        .card-details p {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            padding: 100px 0 40px;
+            text-align: center;
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: #333;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            .center-brand h1 { font-size: 16px; letter-spacing: 4px; }
+            .top-left-name { font-size: 10px; top: 20px; left: 20px; }
+            header { height: 140px; }
+        }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <nav class="social-family-nav">
-        <div class="logo-text">SOCIAL FAMILY</div>
-    </nav>
-
-    <section class="hero-profile">
-        <div class="hero-overlay"></div>
-        <div class="profile-content">
-            <div class="avatar-frame">
-                <img src="https://via.placeholder.com/150" alt="RFL" style="width: 100%; height: 100%; object-fit: cover;">
+    <header>
+        <div class="top-left-name">RFL•★•REAL</div>
+        
+        <div class="center-brand">
+            <h1>Social RFL•★•REAL Family</h1>
+            <div class="pulsing-line-container">
+                <div class="line"></div>
             </div>
-            <h2 style="margin-top: 20px; letter-spacing: 3px;">RFL•★•REAL</h2>
-            <div class="status-badge">FAMÍLIA FOUNDER</div>
         </div>
-    </section>
+    </header>
 
-    <main class="creative-feed">
-        <article class="social-card">
-            <img src="https://via.placeholder.com/300x400" class="card-image" alt="Vibe">
-            <h3>NIGHT VIBES</h3>
-            <p style="color: #aaa; font-size: 0.9rem;">Explorando a vida noturna do Avakin com a melhor família.</p>
-            <button class="btn-family">Inspecionar</button>
-        </article>
+    <main>
+        <div class="section-title">Latest Archives / Projects</div>
+        
+        <div class="content-grid">
+            <article class="entry-card">
+                <div class="img-container">
+                    <img src="https://via.placeholder.com/600x400/111/fff?text=AVAKIN+EDITORIAL" alt="Editorial">
+                </div>
+                <div class="card-details">
+                    <h3>EDITORIAL_01</h3>
+                    <p>Análise de estética virtual e design de ambiente no metaverso Avakin Life.</p>
+                </div>
+            </article>
 
-        <article class="social-card">
-            <img src="https://via.placeholder.com/300x300" class="card-image" alt="Look">
-            <h3>GOLDEN LOOK</h3>
-            <p style="color: #aaa; font-size: 0.9rem;">O ouro nunca sai de moda na Social Family.</p>
-            <button class="btn-family">Inspecionar</button>
-        </article>
+            <article class="entry-card">
+                <div class="img-container">
+                    <img src="https://via.placeholder.com/600x400/111/fff?text=FAMILY+STRUCTURE" alt="Structure">
+                </div>
+                <div class="card-details">
+                    <h3>COMMUNITY_CORE</h3>
+                    <p>A base da Social Family: liderança, lealdade e presença digital.</p>
+                </div>
+            </article>
 
-        <article class="social-card">
-            <img src="https://via.placeholder.com/300x500" class="card-image" alt="Event">
-            <h3>THE MANSION</h3>
-            <p style="color: #aaa; font-size: 0.9rem;">Novo apartamento disponível para o evento de hoje.</p>
-            <button class="btn-family">Inspecionar</button>
-        </article>
+            <article class="entry-card">
+                <div class="img-container">
+                    <img src="https://via.placeholder.com/600x400/111/fff?text=IDENTITY+SYSTEM" alt="Identity">
+                </div>
+                <div class="card-details">
+                    <h3>VISUAL_ID</h3>
+                    <p>Sistemas de identidade visual aplicados a perfis de alta performance.</p>
+                </div>
+            </article>
+        </div>
     </main>
+
+    <footer>
+        &copy; 2026 SOCIAL RFL•★•REAL FAMILY | ALL RIGHTS RESERVED
+    </footer>
 
 </body>
 </html>
