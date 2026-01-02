@@ -1,5 +1,3 @@
-// menu_esquerdo.js
-
 // 1. Injetar o Estilo (CSS)
 const style = document.createElement('style');
 style.textContent = `
@@ -8,34 +6,39 @@ style.textContent = `
         left: 0;
         top: 100px;
         bottom: 0;
-        width: 70px;
+        width: 65px; /* Ajustado para bater com o padding do body */
         background: #050505;
         border-right: 1px solid #111;
         display: flex;
         flex-direction: column;
         align-items: center;
         padding: 20px 0;
-        z-index: 999;
+        z-index: 9999 !important; /* RFL: Garante que fique na frente de tudo */
     }
     .menu-item {
-        width: 45px;
-        height: 45px;
+        width: 40px;
+        height: 40px;
         display: flex;
         align-items: center;
         justify-content: center;
         margin-bottom: 15px;
         cursor: pointer;
-        font-size: 20px;
+        font-size: 18px;
         transition: 0.3s;
-        border-radius: 12px;
-        color: #666; /* Cor padrão dos ícones */
+        border-radius: 10px;
+        color: #666; 
     }
     .menu-item:hover { background: #1a1a1a; color: #fff; }
     .menu-item.active { background: #fff; color: #000; }
     .menu-bottom { margin-top: auto; color: #444; }
 
+    /* RFL: REMOVIDO O 'DISPLAY: NONE' QUE ESCONDIA O MENU NO CELULAR */
     @media (max-width: 900px) {
-        .side-menu-icons { display: none; }
+        .side-menu-icons { 
+            display: flex; /* Agora ele continua aparecendo */
+            top: 100px; /* Mantém abaixo do seu header */
+            width: 60px;
+        }
     }
 `;
 document.head.appendChild(style);
@@ -53,12 +56,10 @@ menuContainer.innerHTML = `
 
 // Função para mudar a aba e destacar o ícone
 window.menuNav = function(viewId, element) {
-    // Se houver uma viewId (feedView ou chatView), chama a função original do seu HTML
     if(viewId && typeof showView === 'function') {
         showView(viewId);
     }
     
-    // Remove 'active' de todos e coloca no clicado
     document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
     element.classList.add('active');
 };
