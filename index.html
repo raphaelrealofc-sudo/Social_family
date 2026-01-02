@@ -2,53 +2,77 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SOCIAL FAMILY | RFL•★•REAL</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; display: flex; flex-direction: column; min-height: 100vh; }
-
-        /* HEADER */
-        header {
-            width: 100%; height: 150px; display: flex; flex-direction: column; justify-content: center;
-            border-bottom: 1px solid rgba(255,255,255,0.05); position: sticky; top: 0; background: #000; z-index: 100;
-        }
-        .top-left-name { position: absolute; top: 30px; left: 40px; font-family: 'Syncopate', sans-serif; font-size: 10px; letter-spacing: 3px; animation: pulse 3s infinite; }
-        .center-brand { text-align: center; }
-        .center-brand h1 { font-family: 'Syncopate', sans-serif; font-size: 20px; letter-spacing: 5px; animation: pulse 4s infinite; }
-        .line { height: 1px; width: 40%; margin: 10px auto; background: linear-gradient(90deg, transparent, #fff, transparent); }
-
-        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-
-        /* LAYOUT PRINCIPAL (Feed + Chat) */
-        .main-wrapper { display: flex; max-width: 1400px; margin: 20px auto; width: 100%; gap: 20px; padding: 0 20px; flex: 1; }
-
-        /* FEED (Lado Esquerdo) */
-        main { flex: 2; max-width: 850px; }
-        .upload-section { background: #080808; border: 1px solid #1a1a1a; padding: 20px; margin-bottom: 30px; }
-        .upload-container textarea { width: 100%; background: transparent; border: none; color: white; resize: none; height: 60px; outline: none; }
-        .btn-publish { background: #fff; color: #000; border: none; padding: 8px 20px; font-weight: bold; cursor: pointer; font-size: 11px; }
-
-        /* CHAT (Lado Direito) */
-        .chat-sidebar { flex: 1; min-width: 320px; background: #050505; border-left: 1px solid #111; height: calc(100vh - 190px); position: sticky; top: 170px; display: flex; flex-direction: column; }
-        .chat-tabs { display: flex; border-bottom: 1px solid #111; }
-        .tab-btn { flex: 1; background: transparent; border: none; color: #555; padding: 15px; cursor: pointer; font-family: 'Syncopate', sans-serif; font-size: 9px; letter-spacing: 1px; }
-        .tab-btn.active { color: #fff; border-bottom: 2px solid #fff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
-        .chat-messages { flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 10px; }
-        .msg { background: #0a0a0a; padding: 10px; border-radius: 4px; font-size: 12px; position: relative; border-left: 2px solid #333; }
-        .msg-user { font-weight: bold; font-size: 10px; color: #fff; margin-bottom: 5px; display: block; letter-spacing: 1px; }
-        .delete-btn { position: absolute; right: 10px; top: 10px; color: #ff4444; font-size: 9px; cursor: pointer; opacity: 0.5; }
-        .delete-btn:hover { opacity: 1; }
+        body { 
+            background-color: #000; color: #fff; 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden;
+            display: flex; flex-direction: column; height: 100vh;
+        }
 
-        .chat-input-area { padding: 15px; border-top: 1px solid #111; display: flex; gap: 10px; }
-        .chat-input-area input { flex: 1; background: #111; border: 1px solid #222; color: white; padding: 10px; outline: none; font-size: 12px; }
-        .btn-send { background: #fff; border: none; padding: 0 15px; cursor: pointer; font-weight: bold; }
+        /* HEADER PULSANTE */
+        header {
+            width: 100%; height: 120px; flex-shrink: 0;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05); background: #000;
+        }
+        .top-left-name { font-family: 'Syncopate', sans-serif; font-size: 10px; letter-spacing: 2px; animation: pulse 3s infinite; margin-bottom: 10px; }
+        .center-brand h1 { font-family: 'Syncopate', sans-serif; font-size: 16px; letter-spacing: 4px; animation: pulse 4s infinite; text-align: center; }
+        .line { height: 1px; width: 50%; margin: 8px auto; background: linear-gradient(90deg, transparent, #fff, transparent); }
 
-        @media (max-width: 900px) {
-            .main-wrapper { flex-direction: column; }
-            .chat-sidebar { height: 400px; position: static; }
+        @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+        /* CONTAINER PRINCIPAL */
+        .app-container { display: flex; flex: 1; overflow: hidden; position: relative; }
+
+        /* SEÇÕES (FEED E CHAT) */
+        .view-section { 
+            flex: 1; height: 100%; overflow-y: auto; 
+            display: none; /* Escondido por padrão no mobile */
+            padding: 20px;
+        }
+        .view-section.active { display: block; }
+
+        /* FEED STYLE */
+        .upload-section { background: #080808; border: 1px solid #1a1a1a; padding: 15px; margin-bottom: 25px; border-radius: 4px; }
+        textarea { width: 100%; background: transparent; border: none; color: #fff; resize: none; outline: none; font-size: 14px; margin-bottom: 10px; }
+        .btn-publish { background: #fff; color: #000; border: none; padding: 10px 20px; font-weight: bold; font-size: 11px; width: 100%; cursor: pointer; }
+
+        /* CHAT STYLE */
+        .chat-container { display: flex; flex-direction: column; height: 100%; }
+        .chat-tabs { display: flex; gap: 10px; margin-bottom: 15px; }
+        .tab-btn { flex: 1; padding: 12px; background: #111; border: none; color: #555; font-size: 9px; font-family: 'Syncopate'; cursor: pointer; }
+        .tab-btn.active { color: #fff; border-bottom: 2px solid #fff; background: #0a0a0a; }
+        
+        #chatMessages { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-bottom: 80px; }
+        .msg { background: #080808; padding: 12px; border-radius: 4px; border-left: 2px solid #333; position: relative; font-size: 13px; }
+        .msg-user { display: block; font-size: 9px; font-weight: bold; color: #888; margin-bottom: 4px; }
+        .del-msg { position: absolute; right: 10px; top: 10px; color: #ff4444; font-size: 9px; cursor: pointer; }
+
+        .chat-input-box { position: fixed; bottom: 70px; left: 0; width: 100%; padding: 10px 20px; background: #000; border-top: 1px solid #111; display: flex; gap: 10px; }
+        .chat-input-box input { flex: 1; background: #111; border: 1px solid #222; color: #fff; padding: 12px; outline: none; border-radius: 4px; }
+
+        /* NAV INFERIOR (ESTILO APP) */
+        .bottom-nav { 
+            position: fixed; bottom: 0; width: 100%; height: 65px; 
+            background: #050505; border-top: 1px solid #1a1a1a; 
+            display: flex; justify-content: space-around; align-items: center;
+            z-index: 1000;
+        }
+        .nav-item { color: #444; text-align: center; font-size: 10px; font-family: 'Syncopate'; cursor: pointer; transition: 0.3s; }
+        .nav-item.active { color: #fff; }
+
+        /* DESKTOP ADJUSTMENTS */
+        @media (min-width: 900px) {
+            .view-section { display: block !important; }
+            .bottom-nav { display: none; }
+            .chat-input-box { position: absolute; bottom: 0; }
+            #chatMessages { padding-bottom: 20px; }
         }
     </style>
 </head>
@@ -62,87 +86,74 @@
         </div>
     </header>
 
-    <div class="main-wrapper">
-        <main>
-            <section class="upload-section">
-                <div class="upload-container">
-                    <textarea id="postInput" placeholder="O que há de novo na Social Family, RFL?"></textarea>
-                    <div style="text-align: right; margin-top: 10px;">
-                        <button class="btn-publish" onclick="publishPost()">PUBLICAR</button>
-                    </div>
-                </div>
-            </section>
-            <div id="feed" class="feed-container"></div>
-        </main>
-
-        <aside class="chat-sidebar">
-            <div class="chat-tabs">
-                <button class="tab-btn active" onclick="switchTab('GLOBAL')">CHAT GLOBAL</button>
-                <button class="tab-btn" onclick="switchTab('FAMILY')">CHAT FAMILY</button>
+    <div class="app-container">
+        <section id="feedView" class="view-section active">
+            <div class="upload-section">
+                <textarea id="postContent" placeholder="Compartilhe algo com a Family..."></textarea>
+                <button class="btn-publish" onclick="createPost()">PUBLICAR NO FEED</button>
             </div>
-            
-            <div class="chat-messages" id="chatBox">
-                <div class="msg">
-                    <span class="msg-user">SISTEMA:</span>
-                    Bem-vindo ao canal <span id="currentChannel">GLOBAL</span>.
+            <div id="feedList"></div>
+        </section>
+
+        <section id="chatView" class="view-section">
+            <div class="chat-container">
+                <div class="chat-tabs">
+                    <button class="tab-btn active" onclick="setChat('GLOBAL')">GLOBAL</button>
+                    <button class="tab-btn" onclick="setChat('FAMILY')">FAMILY</button>
+                </div>
+                <div id="chatMessages">
+                    <div class="msg"><span class="msg-user">SYSTEM:</span> Bem-vindo ao Chat <span id="chanName">GLOBAL</span>.</div>
+                </div>
+                <div class="chat-input-box">
+                    <input type="text" id="msgText" placeholder="Mensagem...">
+                    <button onclick="sendChatMsg()" style="background:#fff; border:none; padding:0 15px; font-weight:bold;">></button>
                 </div>
             </div>
-
-            <div class="chat-input-area">
-                <input type="text" id="chatInput" placeholder="Sua mensagem...">
-                <button class="btn-send" onclick="sendMsg()">></button>
-            </div>
-        </aside>
+        </section>
     </div>
 
-    <script>
-        let currentChannel = "GLOBAL";
-        const isAdmin = true; // Simulação de Admin para você, RFL•★•REAL
+    <nav class="bottom-nav">
+        <div class="nav-item active" onclick="showView('feedView', this)">FEED</div>
+        <div class="nav-item" onclick="showView('chatView', this)">CHAT</div>
+    </nav>
 
-        function switchTab(channel) {
-            currentChannel = channel;
-            document.getElementById('currentChannel').innerText = channel;
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.innerText.includes(channel));
-            });
-            // Limpa o chat para simular troca de sala
-            document.getElementById('chatBox').innerHTML = `<div class="msg"><span class="msg-user">SISTEMA:</span> Canal ${channel} conectado.</div>`;
+    <script>
+        const isAdmin = true;
+
+        // Troca de Telas (Mobile)
+        function showView(viewId, el) {
+            document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            el.classList.add('active');
         }
 
-        function sendMsg() {
-            const input = document.getElementById('chatInput');
-            if (input.value.trim() === "") return;
+        // Funções de Post e Chat
+        function createPost() {
+            const val = document.getElementById('postContent').value;
+            if(!val) return;
+            const div = document.createElement('div');
+            div.className = 'upload-section'; // Reaproveitando estilo
+            div.innerHTML = `<small style="color:#555; font-size:9px">@RFL•★•REAL // AGORA</small><p style="margin-top:10px">${val}</p>`;
+            document.getElementById('feedList').prepend(div);
+            document.getElementById('postContent').value = "";
+        }
 
-            const chatBox = document.getElementById('chatBox');
+        function setChat(chan) {
+            document.getElementById('chanName').innerText = chan;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.innerText === chan));
+        }
+
+        function sendChatMsg() {
+            const txt = document.getElementById('msgText').value;
+            if(!txt) return;
             const msgDiv = document.createElement('div');
             msgDiv.className = 'msg';
-            
-            // Gerar HTML da mensagem com botão apagar se for Admin
-            let deleteHtml = isAdmin ? `<span class="delete-btn" onclick="this.parentElement.remove()">APAGAR</span>` : '';
-            
-            msgDiv.innerHTML = `
-                <span class="msg-user">RFL•★•REAL:</span>
-                ${input.value}
-                ${deleteHtml}
-            `;
-
-            chatBox.appendChild(msgDiv);
-            chatBox.scrollTop = chatBox.scrollHeight;
-            input.value = "";
-        }
-
-        function publishPost() {
-            const input = document.getElementById('postInput');
-            if (input.value.trim() === "") return;
-            const feed = document.getElementById('feed');
-            const post = document.createElement('div');
-            post.style.background = "#080808";
-            post.style.padding = "20px";
-            post.style.marginBottom = "20px";
-            post.style.border = "1px solid #111";
-            post.innerHTML = `<div style="font-size:10px; color:#555; margin-bottom:10px">POSTED BY RFL•★•REAL</div><div>${input.value}</div>`;
-            feed.prepend(post);
-            input.value = "";
+            msgDiv.innerHTML = `<span class="msg-user">RFL•★•REAL:</span> ${txt}${isAdmin ? '<span class="del-msg" onclick="this.parentElement.remove()">APAGAR</span>' : ''}`;
+            const box = document.getElementById('chatMessages');
+            box.appendChild(msgDiv);
+            box.scrollTop = box.scrollHeight;
+            document.getElementById('msgText').value = "";
         }
     </script>
 </body>
