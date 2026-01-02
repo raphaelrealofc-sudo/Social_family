@@ -90,6 +90,35 @@
             .chat-input-box { position: relative; bottom: auto; padding: 15px 0 0; }
             #chatMessages { padding-bottom: 20px; }
         }
+        .media-options {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #111;
+}
+
+.media-btn {
+    cursor: pointer;
+    font-size: 10px;
+    color: #444; /* Cor discreta para não carregar o visual */
+    font-family: 'Syncopate', sans-serif;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.media-btn:hover, .media-btn.active {
+    color: #fff; /* Fica branco ao passar o mouse ou selecionar */
+    text-shadow: 0 0 8px rgba(255,255,255,0.5);
+}
+
+.upload-section {
+    background: #080808;
+    border: 1px solid #1a1a1a;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 4px;
+}
     </style>
 </head>
 <body>
